@@ -1,17 +1,41 @@
-research_task:
+market_research_task:
   description: >
-    Conduct a thorough research about {topic}
-    Make sure you find any interesting and relevant information given
-    the current year is {current_year}.
+    Gather the most up-to-date market information related to {topic} companies and sectors.
+    Include price movements, financial news, earnings reports, macroeconomic events,
+    technical trends, analyst ratings, institutional activity, and any credible signals
+    that could affect investment decisions.
+    Only include information that is relevant for making buy, sell, or hold decisions.
   expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
-  agent: researcher
+    A structured list of the most impactful findings with sources and timestamps when possible.
+  agent: market_researcher
 
-reporting_task:
+investment_analysis_task:
   description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
+    Review the research findings and evaluate each stock using financial ratios,
+    revenue/earnings trends, valuation metrics, technical indicators, sector momentum,
+    and risk considerations.
+    Score each stock on a scale of 1-10 for investment strength and justify the score.
   expected_output: >
-    A fully fledged report with the main topics, each with a full section of information.
-    Formatted as markdown without '```'
-  agent: reporting_analyst
+    A table listing each stock with the following columns:
+    - Investment Score (1–10)
+    - Buy/Sell/Hold Signal
+    - Supporting Evidence (concise)
+    - Risk Level (Low / Medium / High)
+  agent: investment_analyst
+
+portfolio_recommendation_task:
+  description: >
+    Use the analysis to recommend precise portfolio actions.
+    For each stock, state whether to Buy, Sell, or Hold, along with:
+    - Suggested entry price or sell target
+    - Time horizon
+    - Expected return
+    - Risk level
+    - Allocation percentage (optional if no portfolio value provided)
+  expected_output: >
+    A final investment report formatted in markdown (no ``` symbols),
+    including:
+    - Summary table of recommendations
+    - Detailed explanation of reasoning
+    - Risk warnings and market outlook
+  agent: portfolio_advisor

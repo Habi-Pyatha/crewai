@@ -13,14 +13,27 @@ warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 # Replace with inputs you want to test with, it will automatically
 # interpolate any tasks and agents information
 
+USER_TOPIC = None
+
+def get_inputs():
+    global USER_TOPIC
+    if USER_TOPIC is None:
+        USER_TOPIC = input("Enter the topic you want to research: ").strip()
+
+    return {
+        'topic': USER_TOPIC,
+        'current_year': str(datetime.now().year)
+    }
+
 def run():
     """
     Run the crew.
     """
-    inputs = {
-        'topic': 'AI LLMs',
-        'current_year': str(datetime.now().year)
-    }
+    # inputs = {
+    #     'topic': 'Best Stocks to Buy Today in Nepal',
+    #     'current_year': str(datetime.now().year)
+    # }
+    inputs = get_inputs()
 
     try:
         FirstCrewProject().crew().kickoff(inputs=inputs)
@@ -32,10 +45,12 @@ def train():
     """
     Train the crew for a given number of iterations.
     """
-    inputs = {
-        "topic": "AI LLMs",
-        'current_year': str(datetime.now().year)
-    }
+    # inputs = {
+    #     "topic": "Best Stocks to Buy Today in Nepal",
+    #     'current_year': str(datetime.now().year)
+    # }
+    inputs = get_inputs()
+
     try:
         FirstCrewProject().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
 
@@ -56,10 +71,11 @@ def test():
     """
     Test the crew execution and returns the results.
     """
-    inputs = {
-        "topic": "AI LLMs",
-        "current_year": str(datetime.now().year)
-    }
+    # inputs = {
+    #     "topic": "AI LLMs",
+    #     "current_year": str(datetime.now().year)
+    # }
+    inputs = get_inputs()
 
     try:
         FirstCrewProject().crew().test(n_iterations=int(sys.argv[1]), eval_llm=sys.argv[2], inputs=inputs)

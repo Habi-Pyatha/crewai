@@ -20,16 +20,23 @@ class FirstCrewProject():
     # If you would like to add tools to your agents, you can learn more about it here:
     # https://docs.crewai.com/concepts/agents#agent-tools
     @agent
-    def researcher(self) -> Agent:
+    def market_researcher(self) -> Agent:
         return Agent(
-            config=self.agents_config['researcher'], # type: ignore[index]
+            config=self.agents_config['market_researcher'], # type: ignore[index]
             verbose=True
         )
 
     @agent
-    def reporting_analyst(self) -> Agent:
+    def investment_analyst(self) -> Agent:
         return Agent(
-            config=self.agents_config['reporting_analyst'], # type: ignore[index]
+            config=self.agents_config['investment_analyst'], # type: ignore[index]
+            verbose=True
+        )
+
+    @agent
+    def portfolio_advisor(self) -> Agent:
+        return Agent(
+            config=self.agents_config['portfolio_advisor'], # type: ignore[index]
             verbose=True
         )
 
@@ -37,15 +44,22 @@ class FirstCrewProject():
     # task dependencies, and task callbacks, check out the documentation:
     # https://docs.crewai.com/concepts/tasks#overview-of-a-task
     @task
-    def research_task(self) -> Task:
+    def market_research_task(self) -> Task:
         return Task(
-            config=self.tasks_config['research_task'], # type: ignore[index]
+            config=self.tasks_config['market_research_task'], # type: ignore[index]
         )
 
     @task
-    def reporting_task(self) -> Task:
+    def investment_analysis_task(self) -> Task:
         return Task(
-            config=self.tasks_config['reporting_task'], # type: ignore[index]
+            config=self.tasks_config['investment_analysis_task'], # type: ignore[index]
+            output_file='report.md'
+        )
+
+    @task
+    def portfolio_recommendation_task(self) -> Task:
+        return Task(
+            config=self.tasks_config['portfolio_recommendation_task'], # type: ignore[index]
             output_file='report.md'
         )
 
