@@ -1,41 +1,48 @@
-market_research_task:
+# ============================================
+# Dynamic topic-agnostic tasks.yml for CrewAI
+# ============================================
+
+# Task 1: Research
+research_task:
   description: >
-    Gather the most up-to-date market information related to {topic} companies and sectors.
-    Include price movements, financial news, earnings reports, macroeconomic events,
-    technical trends, analyst ratings, institutional activity, and any credible signals
-    that could affect investment decisions.
-    Only include information that is relevant for making buy, sell, or hold decisions.
+    Gather the most relevant and up-to-date information about {topic}.
+    Include trends, news, events, ratings, reviews, or any credible signals
+    that could affect understanding or decisions related to {topic}.
+    Only include actionable or important information.
   expected_output: >
     A structured list of the most impactful findings with sources and timestamps when possible.
-  agent: market_researcher
+    - Maximum 10 bullet points
+    - Concise and easy to read
+  agent: researcher
 
-investment_analysis_task:
+# Task 2: Analysis
+analysis_task:
   description: >
-    Review the research findings and evaluate each stock using financial ratios,
-    revenue/earnings trends, valuation metrics, technical indicators, sector momentum,
-    and risk considerations.
-    Score each stock on a scale of 1-10 for investment strength and justify the score.
+    Review the research findings and evaluate them carefully.
+    Identify patterns, key points, pros/cons, or insights depending on the topic.
+    Provide reasoning, scoring, or categorization if applicable.
   expected_output: >
-    A table listing each stock with the following columns:
-    - Investment Score (1–10)
-    - Buy/Sell/Hold Signal
-    - Supporting Evidence (concise)
-    - Risk Level (Low / Medium / High)
-  agent: investment_analyst
+    A table or structured summary in Markdown, including:
+    - Maximum 10 rows
+    - Columns: "Category | Key Action/Guidance"
+    - Wrap long lines at ~80 characters
+    - Concise supporting evidence for each row
+  agent: analyst
 
-portfolio_recommendation_task:
+# Task 3: Reporting
+reporting_task:
   description: >
-    Use the analysis to recommend precise portfolio actions.
-    For each stock, state whether to Buy, Sell, or Hold, along with:
-    - Suggested entry price or sell target
-    - Time horizon
-    - Expected return
-    - Risk level
-    - Allocation percentage (optional if no portfolio value provided)
+    Use the analysis to prepare a final report or recommendation.
+    Include clear guidance, summaries, and actionable conclusions where possible.
+    Ensure readability in Markdown for PDF conversion.
   expected_output: >
-    A final investment report formatted in markdown (no ``` symbols),
-    including:
-    - Summary table of recommendations
-    - Detailed explanation of reasoning
-    - Risk warnings and market outlook
-  agent: portfolio_advisor
+    A final report in Markdown (no ``` symbols), including:
+    - Summary table or list of recommendations (max 10 rows)
+    - Detailed explanations with headings for each major topic
+    - Important warnings, notes, or outlook
+    - Wrap lines at ~80 characters for proper PDF rendering
+    - Use consistent Markdown table format:
+      | Category | Key Action/Guidance |
+      | :------- | :----------------- |
+      | ...      | ...               |
+  agent: reporting_advisor
